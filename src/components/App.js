@@ -16,9 +16,9 @@ function App() {
         <Routes>
           <Route exact path="/" element={<div>Home</div>}>
             <Route path="/services" element={<div>services</div>} />
-            <Route path="/customsoftware" element={<div>services</div>} />
-            <Route path="/mobileapps" element={<div>services</div>} />
-            <Route path="/websites" element={<div>services</div>} />
+            <Route path="/softwaredev" element={<div>services</div>} />
+            <Route path="/appdev" element={<div>services</div>} />
+            <Route path="/websitedev" element={<div>services</div>} />
             <Route path="/revolution" />
             <Route path="/about" element={<div>services</div>} />
             <Route path="/contact" element={<div>services</div>} />
