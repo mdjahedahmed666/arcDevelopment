@@ -91,7 +91,9 @@ const useStyle = makeStyles(theme => ({
         opacity: "0.7"
     },
     drawerItemSelected: {
-        opacity: 1
+        "& .MuiListItemText-root": {
+            opacity: 1
+        }
     },
     drawerItemEStimate: {
         backgroundColor: theme.palette.common.orange
@@ -103,6 +105,9 @@ const useStyle = makeStyles(theme => ({
     },
     drawerIconContainer: {
         marginLeft: "auto"
+    },
+    appbar: {
+        zIndex: theme.zIndex.modal + 1
     }
 }));
 
@@ -135,20 +140,23 @@ const Header = () => {
     };
 
     const menuOptions = [
-        { name: "Services", link: "/services", activeIndex: 1, selectedIndex: 0 },
+        { id:1, name: "Services", link: "/services", activeIndex: 1, selectedIndex: 0 },
         {
+            id:2,
             name: "Software Development",
             link: "/softwaredev",
             activeIndex: 1,
             selectedIndex: 1
         },
         {
+            id:3,
             name: "App Development",
             link: "/appdev",
             activeIndex: 1,
             selectedIndex: 2
         },
         {
+            id:4,
             name: "Website Development",
             link: "/websitedev",
             activeIndex: 1,
@@ -156,8 +164,9 @@ const Header = () => {
         }
     ];
     const routes = [
-        { name: "Home", link: "/", activeIndex: 0 },
+        { id:1, name: "Home", link: "/", activeIndex: 0 },
         {
+            id:2,
             name: "Services",
             link: "/services",
             activeIndex: 1,
@@ -165,9 +174,9 @@ const Header = () => {
             ariaPopup: anchorEl ? "true" : undefined,
             mouseOver: event => handleClick(event)
         },
-        { name: "The Revolution", link: "/revolution", activeIndex: 2 },
-        { name: "About Us", link: "/about", activeIndex: 3 },
-        { name: "Contact Us", link: "/contact", activeIndex: 4 }
+        { id:3, name: "The Revolution", link: "/revolution", activeIndex: 2 },
+        { id:4, name: "About Us", link: "/about", activeIndex: 3 },
+        { id:5, name: "Contact Us", link: "/contact", activeIndex: 4 }
     ];
 
     useEffect(() => {
@@ -191,7 +200,7 @@ const Header = () => {
                     break;
             }
         });
-    }, [props.value, menuOptions, props.selectedIndex, routes, props]);
+    }, [value, menuOptions, selectedIndex, routes]);
     // if (window.location.pathname === "/" && value !== 0) {
     //     setValue(0);
     // } else if (window.location.pathname === "/services" && value !== 1) {
@@ -254,91 +263,104 @@ const Header = () => {
     //     default:
     //         break;
     // }
-}, [value])
+    // }, [value])
 
-const tabs = (
-    <>
-        <Tabs value={value} onChange={handleChange} className={classes.tabContainer} indicatorColor="primary">
-            <Tab component={Link} to="/" className={classes.tab} label="Home" />
-            <Tab aria-owns={anchorEl ? "simple-menu" : undefined} aria-haspopup={anchorEl ? "true" : undefined} onMouseOver={event => handleClick(event)} component={Link} to="/services" className={classes.tab} label="Services" />
-            <Tab component={Link} to="/revolution" className={classes.tab} label="Revolution" />
-            <Tab component={Link} to="/about" className={classes.tab} label="About Us" />
-            <Tab component={Link} to="/contact" className={classes.tab} label="Contact Us" />
-        </Tabs>
-        <Button variant="contained" color="secondary" className={classes.button}>Free Estimate</Button>
-        <Menu
-            id="simple-menu"
-            anchorEl={anchorEl}
-            open={openMenu}
-            onClose={handleClose}
-            MenuListProps={{ onMouseLeave: handleClose }}
-            classes={{ paper: classes.menu }}
-            elevation={0}
-        >
-            {
-                menuOptions.map((option, i) =>
-                (
-                    <MenuItem key={option} component={Link} to={option.link} classes={{ root: classes.menuItem }} onClick={event => {
-                        handleMenuItemClick(event, i);
-                        setValue(1);
-                        handleClose();
-                    }} selected={i === selectedIndex && value === 1}>
-                        {option.name}
+    const tabs = (
+        <>
+            <Tabs value={value} onChange={handleChange} className={classes.tabContainer} indicatorColor="primary">
+                {
+                    routes.map((route, index) => (
+                        <Tab key={route.id} aria-owns={route.ariaOwns} aria-haspopup={route.ariaPopup} onMouseOver={route.mouseOver} component={Link} to={route.link} className={classes.tab} label={route.name} />
+                    ))
+                }
+                {/* <Tab component={Link} to="/" className={classes.tab} label="Home" />
+                <Tab aria-owns={anchorEl ? "simple-menu" : undefined} aria-haspopup={anchorEl ? "true" : undefined} onMouseOver={event => handleClick(event)} component={Link} to="/services" className={classes.tab} label="Services" />
+                <Tab component={Link} to="/revolution" className={classes.tab} label="Revolution" />
+                <Tab component={Link} to="/about" className={classes.tab} label="About Us" />
+                <Tab component={Link} to="/contact" className={classes.tab} label="Contact Us" /> */}
+            </Tabs>
+            <Button variant="contained" color="secondary" className={classes.button}>Free Estimate</Button>
+            <Menu
+                id="simple-menu"
+                anchorEl={anchorEl}
+                open={openMenu}
+                onClose={handleClose}
+                MenuListProps={{ onMouseLeave: handleClose }}
+                classes={{ paper: classes.menu }}
+                elevation={0}
+                keepMounted
+                style={{ zIndex: 1302 }}
+            >
+                {
+                    menuOptions.map((option, i) =>
+                    (
+                        <MenuItem key={option.id} component={Link} to={option.link} classes={{ root: classes.menuItem }} onClick={event => {
+                            handleMenuItemClick(event, i);
+                            setValue(1);
+                            handleClose();
+                        }} selected={i === selectedIndex && value === 1}>
+                            {option.name}
 
-                    </MenuItem>
-                ))
-            }
-            {/* <MenuItem onClick={() => { handleClose(); setValue(1) }} component={Link} to="/services" classes={{ root: classes.menuItem }}>Services</MenuItem>
+                        </MenuItem>
+                    ))
+                }
+                {/* <MenuItem onClick={() => { handleClose(); setValue(1) }} component={Link} to="/services" classes={{ root: classes.menuItem }}>Services</MenuItem>
                             <MenuItem onClick={() => { handleClose(); setValue(1) }} component={Link} to="/softwaredev" classes={{ root: classes.menuItem }}>Software Development</MenuItem>
                             <MenuItem onClick={() => { handleClose(); setValue(1) }} component={Link} to="/appdev" classes={{ root: classes.menuItem }}>App Development</MenuItem>
                             <MenuItem onClick={() => { handleClose(); setValue(1) }} component={Link} to="/websitedev" classes={{ root: classes.menuItem }}>Website Development</MenuItem> */}
-        </Menu>
-    </>
-)
-const drawer = (
-    <>
-        <SwipeableDrawer disableBackdropTransition={!iOS} disableDiscovery={iOS} open={openDrawer} onClose={() => setOpenDrawer(false)} onOpen={() => setOpenDrawer(true)} classes={{ paper: classes.drawer }}>
-            <List disablePadding>
-                <ListItem onClick={() => { setOpenDrawer(false); setValue(0) }} component={Link} to="/" divider button selected={value === 0}>
-                    <ListItemText disableTypography className={value === 0 ? [classes.drawerItem, classes.drawerItemSelected] : classes.drawerItem}>Home</ListItemText>
-                </ListItem>
-                <ListItem onClick={() => { setOpenDrawer(false); setValue(1) }} component={Link} to="/services" divider button selected={value === 1}>
-                    <ListItemText disableTypography className={value === 1 ? [classes.drawerItem, classes.drawerItemSelected] : classes.drawerItem}>Services</ListItemText>
-                </ListItem>
-                <ListItem onClick={() => { setOpenDrawer(false); setValue(2) }} component={Link} to="/revolution" divider button selected={value === 2}>
-                    <ListItemText disableTypography className={value === 2 ? [classes.drawerItem, classes.drawerItemSelected] : classes.drawerItem}>Revolution</ListItemText>
-                </ListItem>
-                <ListItem onClick={() => { setOpenDrawer(false); setValue(3) }} component={Link} to="/about" divider button selected={value === 3}>
-                    <ListItemText disableTypography className={value === 3 ? [classes.drawerItem, classes.drawerItemSelected] : classes.drawerItem}>About Us</ListItemText>
-                </ListItem>
-                <ListItem onClick={() => { setOpenDrawer(false); setValue(4) }} component={Link} to="/contact" divider button selected={value === 4}>
-                    <ListItemText disableTypography className={value === 4 ? [classes.drawerItem, classes.drawerItemSelected] : classes.drawerItem}>Contact Us</ListItemText>
-                </ListItem>
-                <ListItem onClick={() => { setOpenDrawer(false); setValue(5) }} component={Link} to="/estimate" divider button className={classes.drawerItemEStimate} selected={value === 5}>
-                    <ListItemText disableTypography className={value === 5 ? [classes.drawerItem, classes.drawerItemSelected] : classes.drawerItem}>Free Estimate</ListItemText>
-                </ListItem>
-            </List>
-        </SwipeableDrawer>
-        <IconButton className={classes.drawerIconContainer} onClick={() => setOpenDrawer(!openDrawer)} disableRipple>
-            <MenuIcon className={classes.drawerIcon} />
-        </IconButton>
-    </>
-)
-return (
-    <>
-        <ElevationScroll>
-            <AppBar position="fixed">
-                <Toolbar disableGutters>
-                    <Button component={Link} to="/" className={classes.logoContainer} onClick={() => setValue(0)} disableRipple>
-                        <img src={logo} alt="company logo" className={classes.logo} />
-                    </Button>
-                    {matches ? drawer : tabs}
-                </Toolbar>
-            </AppBar>
-        </ElevationScroll>
-        <div className={classes.toolbarMargin} />
-    </>
-);
+            </Menu>
+        </>
+    )
+    const drawer = (
+        <>
+            <SwipeableDrawer disableBackdropTransition={!iOS} disableDiscovery={iOS} open={openDrawer} onClose={() => setOpenDrawer(false)} onOpen={() => setOpenDrawer(true)} classes={{ paper: classes.drawer }}>
+                <div className={classes.toolbarMargin} />
+                <List disablePadding>
+                    {routes.map((route) => (
+                        <ListItem key={route.id} onClick={() => { setOpenDrawer(false); setValue(route.activeIndex) }} component={Link} to={route.link} divider button selected={value === route.activeIndex} classes={{ selected: classes.drawerItemSelected }}>
+                            <ListItemText disableTypography className={classes.drawerItem}>{route.name}</ListItemText>
+                        </ListItem>
+                    ))}
+                    {/* <ListItem onClick={() => { setOpenDrawer(false); setValue(0) }} component={Link} to="/" divider button selected={value === 0}>
+                        <ListItemText disableTypography className={value === 0 ? [classes.drawerItem, classes.drawerItemSelected] : classes.drawerItem}>Home</ListItemText>
+                    </ListItem>
+                    <ListItem onClick={() => { setOpenDrawer(false); setValue(1) }} component={Link} to="/services" divider button selected={value === 1}>
+                        <ListItemText disableTypography className={value === 1 ? [classes.drawerItem, classes.drawerItemSelected] : classes.drawerItem}>Services</ListItemText>
+                    </ListItem>
+                    <ListItem onClick={() => { setOpenDrawer(false); setValue(2) }} component={Link} to="/revolution" divider button selected={value === 2}>
+                        <ListItemText disableTypography className={value === 2 ? [classes.drawerItem, classes.drawerItemSelected] : classes.drawerItem}>Revolution</ListItemText>
+                    </ListItem>
+                    <ListItem onClick={() => { setOpenDrawer(false); setValue(3) }} component={Link} to="/about" divider button selected={value === 3}>
+                        <ListItemText disableTypography className={value === 3 ? [classes.drawerItem, classes.drawerItemSelected] : classes.drawerItem}>About Us</ListItemText>
+                    </ListItem>
+                    <ListItem onClick={() => { setOpenDrawer(false); setValue(4) }} component={Link} to="/contact" divider button selected={value === 4}>
+                        <ListItemText disableTypography className={value === 4 ? [classes.drawerItem, classes.drawerItemSelected] : classes.drawerItem}>Contact Us</ListItemText>
+                    </ListItem> */}
+                    <ListItem onClick={() => { setOpenDrawer(false); setValue(5) }} component={Link} to="/estimate" divider button selected={value === 5} classes={{ root: classes.drawerItemEstimate, selected: classes.drawerItemSelected }}>
+                        <ListItemText disableTypography className={classes.drawerItem}>Free Estimate</ListItemText>
+                    </ListItem>
+                </List>
+            </SwipeableDrawer>
+            <IconButton className={classes.drawerIconContainer} onClick={() => setOpenDrawer(!openDrawer)} disableRipple>
+                <MenuIcon className={classes.drawerIcon} />
+            </IconButton>
+        </>
+    )
+    return (
+        <>
+            <ElevationScroll>
+                <AppBar position="fixed" className={classes.appbar}>
+                    <Toolbar disableGutters>
+                        <Button component={Link} to="/" className={classes.logoContainer} onClick={() => setValue(0)} disableRipple>
+                            <img src={logo} alt="company logo" className={classes.logo} />
+                        </Button>
+                        {matches ? drawer : tabs}
+                    </Toolbar>
+                </AppBar>
+            </ElevationScroll>
+            <div className={classes.toolbarMargin} />
+        </>
+    );
 };
 
 export default Header;
