@@ -46,7 +46,9 @@ const useStyle = makeStyles(theme => ({
             height: "5.5em"
         },
         [theme.breakpoints.down("xs")]: {
-            height: "4em"
+            height: "5.3em",
+            verticalAlign: 'center'
+
         }
     },
     logoContainer: {
@@ -140,23 +142,23 @@ const Header = () => {
     };
 
     const menuOptions = [
-        { id:1, name: "Services", link: "/services", activeIndex: 1, selectedIndex: 0 },
+        { id: 1, name: "Services", link: "/services", activeIndex: 1, selectedIndex: 0 },
         {
-            id:2,
+            id: 2,
             name: "Software Development",
             link: "/softwaredev",
             activeIndex: 1,
             selectedIndex: 1
         },
         {
-            id:3,
+            id: 3,
             name: "App Development",
             link: "/appdev",
             activeIndex: 1,
             selectedIndex: 2
         },
         {
-            id:4,
+            id: 4,
             name: "Website Development",
             link: "/websitedev",
             activeIndex: 1,
@@ -164,9 +166,9 @@ const Header = () => {
         }
     ];
     const routes = [
-        { id:1, name: "Home", link: "/", activeIndex: 0 },
+        { id: 1, name: "Home", link: "/", activeIndex: 0 },
         {
-            id:2,
+            id: 2,
             name: "Services",
             link: "/services",
             activeIndex: 1,
@@ -174,9 +176,9 @@ const Header = () => {
             ariaPopup: anchorEl ? "true" : undefined,
             mouseOver: event => handleClick(event)
         },
-        { id:3, name: "The Revolution", link: "/revolution", activeIndex: 2 },
-        { id:4, name: "About Us", link: "/about", activeIndex: 3 },
-        { id:5, name: "Contact Us", link: "/contact", activeIndex: 4 }
+        { id: 3, name: "The Revolution", link: "/revolution", activeIndex: 2 },
+        { id: 4, name: "About Us", link: "/about", activeIndex: 3 },
+        { id: 5, name: "Contact Us", link: "/contact", activeIndex: 4 }
     ];
 
     useEffect(() => {
