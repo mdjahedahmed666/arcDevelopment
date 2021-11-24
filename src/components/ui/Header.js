@@ -113,15 +113,13 @@ const useStyle = makeStyles(theme => ({
     }
 }));
 
-const Header = () => {
+const Header = (props) => {
     const classes = useStyle();
     const theme = useTheme();
     const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
     const matches = useMediaQuery(theme.breakpoints.down("md"));
-    const [value, setValue] = useState(0);
     const [anchorEl, setAnchorEl] = useState(null);
     const [openMenu, setOpenMenu] = useState(false);
-    const [selectedIndex, setSelectedIndex] = useState(0);
     const [openDrawer, setOpenDrawer] = useState(false);
 
     const handleClick = (event) => {
@@ -133,12 +131,12 @@ const Header = () => {
         setOpenMenu(false);
     };
     const handleChange = (event, newValue) => {
-        setValue(newValue);
+        props.setValue(newValue);
     };
     const handleMenuItemClick = (e, i) => {
         setAnchorEl(null);
         setOpenMenu(false);
-        setSelectedIndex(i);
+        props.setSelectedIndex(i);
     };
 
     const menuOptions = [
@@ -185,81 +183,81 @@ const Header = () => {
         [...menuOptions, ...routes].forEach(route => {
             switch (window.location.pathname) {
                 case `${route.link}`:
-                    if (value !== route.activeIndex) {
-                        setValue(route.activeIndex);
+                    if (props.value !== route.activeIndex) {
+                        props.setValue(route.activeIndex);
                         if (
                             route.selectedIndex &&
-                            route.selectedIndex !== selectedIndex
+                            route.selectedIndex !== props.selectedIndex
                         ) {
-                            setSelectedIndex(selectedIndex);
+                            props.setSelectedIndex(props.selectedIndex);
                         }
                     }
                     break;
                 case "/estimate":
-                    setValue(5);
+                    props.setValue(5);
                     break;
                 default:
                     break;
             }
         });
-    }, [value, menuOptions, selectedIndex, routes]);
+    }, [props.value, menuOptions, props.selectedIndex, routes]);
     // if (window.location.pathname === "/" && value !== 0) {
-    //     setValue(0);
+    //     props.setValue(0);
     // } else if (window.location.pathname === "/services" && value !== 1) {
-    //     setValue(1);
+    //     props.setValue(1);
     // } else if (window.location.pathname === "/revolution" && value !== 2) {
-    //     setValue(2);
+    //     props.setValue(2);
     // } else if (window.location.pathname === "/about" && value !== 3) {
-    //     setValue(3);
+    //     props.setValue(3);
     // } else if (window.location.pathname === "/contact" && value !== 4) {
-    //     setValue(4);
+    //     props.setValue(4);
     // } else if (window.location.pathname === "/estimate" && value !== 5) {
-    //     setValue(5);
+    //     props.setValue(5);
     // }
     // switch (window.location.pathname) {
     //     case "/":
     //         if (value !== 0) {
-    //             setValue(0);
+    //             props.setValue(0);
     //         }
     //         break;
     //     case "/services":
     //         if (value !== 1) {
-    //             setValue(1);
+    //             props.setValue(1);
     //         }
     //         break;
     //     case "/softwaredev":
     //         if (value !== 1) {
-    //             setValue(1);
+    //             props.setValue(1);
     //         }
     //         break;
     //     case "/appdev":
     //         if (value !== 1) {
-    //             setValue(1);
+    //             props.setValue(1);
     //         }
     //         break;
     //     case "/websitedev":
     //         if (value !== 1) {
-    //             setValue(1);
+    //             props.setValue(1);
     //         }
     //         break;
     //     case "/revolution":
     //         if (value !== 2) {
-    //             setValue(2);
+    //             props.setValue(2);
     //         }
     //         break;
     //     case "/about":
     //         if (value !== 3) {
-    //             setValue(3);
+    //             props.setValue(3);
     //         }
     //         break;
     //     case "/contact":
     //         if (value !== 4) {
-    //             setValue(4);
+    //             props.setValue(4);
     //         }
     //         break;
     //     case "/estimate":
     //         if (value !== 5) {
-    //             setValue(5);
+    //             props.setValue(5);
     //         }
     //         break;
     //     default:
@@ -269,7 +267,7 @@ const Header = () => {
 
     const tabs = (
         <>
-            <Tabs value={value} onChange={handleChange} className={classes.tabContainer} indicatorColor="primary">
+            <Tabs value={props.value} onChange={handleChange} className={classes.tabContainer} indicatorColor="primary">
                 {
                     routes.map((route, index) => (
                         <Tab key={route.id} aria-owns={route.ariaOwns} aria-haspopup={route.ariaPopup} onMouseOver={route.mouseOver} component={Link} to={route.link} className={classes.tab} label={route.name} />
@@ -298,18 +296,18 @@ const Header = () => {
                     (
                         <MenuItem key={option.id} component={Link} to={option.link} classes={{ root: classes.menuItem }} onClick={event => {
                             handleMenuItemClick(event, i);
-                            setValue(1);
+                            props.setValue(1);
                             handleClose();
-                        }} selected={i === selectedIndex && value === 1}>
+                        }} selected={i === props.selectedIndex && props.value === 1}>
                             {option.name}
 
                         </MenuItem>
                     ))
                 }
-                {/* <MenuItem onClick={() => { handleClose(); setValue(1) }} component={Link} to="/services" classes={{ root: classes.menuItem }}>Services</MenuItem>
-                            <MenuItem onClick={() => { handleClose(); setValue(1) }} component={Link} to="/softwaredev" classes={{ root: classes.menuItem }}>Software Development</MenuItem>
-                            <MenuItem onClick={() => { handleClose(); setValue(1) }} component={Link} to="/appdev" classes={{ root: classes.menuItem }}>App Development</MenuItem>
-                            <MenuItem onClick={() => { handleClose(); setValue(1) }} component={Link} to="/websitedev" classes={{ root: classes.menuItem }}>Website Development</MenuItem> */}
+                {/* <MenuItem onClick={() => { handleClose(); props.setValue(1) }} component={Link} to="/services" classes={{ root: classes.menuItem }}>Services</MenuItem>
+                            <MenuItem onClick={() => { handleClose(); props.setValue(1) }} component={Link} to="/softwaredev" classes={{ root: classes.menuItem }}>Software Development</MenuItem>
+                            <MenuItem onClick={() => { handleClose(); props.setValue(1) }} component={Link} to="/appdev" classes={{ root: classes.menuItem }}>App Development</MenuItem>
+                            <MenuItem onClick={() => { handleClose(); props.setValue(1) }} component={Link} to="/websitedev" classes={{ root: classes.menuItem }}>Website Development</MenuItem> */}
             </Menu>
         </>
     )
@@ -319,26 +317,26 @@ const Header = () => {
                 <div className={classes.toolbarMargin} />
                 <List disablePadding>
                     {routes.map((route) => (
-                        <ListItem key={route.id} onClick={() => { setOpenDrawer(false); setValue(route.activeIndex) }} component={Link} to={route.link} divider button selected={value === route.activeIndex} classes={{ selected: classes.drawerItemSelected }}>
+                        <ListItem key={route.id} onClick={() => { setOpenDrawer(false); props.setValue(route.activeIndex) }} component={Link} to={route.link} divider button selected={props.value === route.activeIndex} classes={{ selected: classes.drawerItemSelected }}>
                             <ListItemText disableTypography className={classes.drawerItem}>{route.name}</ListItemText>
                         </ListItem>
                     ))}
-                    {/* <ListItem onClick={() => { setOpenDrawer(false); setValue(0) }} component={Link} to="/" divider button selected={value === 0}>
+                    {/* <ListItem onClick={() => { setOpenDrawer(false); props.setValue(0) }} component={Link} to="/" divider button selected={value === 0}>
                         <ListItemText disableTypography className={value === 0 ? [classes.drawerItem, classes.drawerItemSelected] : classes.drawerItem}>Home</ListItemText>
                     </ListItem>
-                    <ListItem onClick={() => { setOpenDrawer(false); setValue(1) }} component={Link} to="/services" divider button selected={value === 1}>
+                    <ListItem onClick={() => { setOpenDrawer(false); props.setValue(1) }} component={Link} to="/services" divider button selected={value === 1}>
                         <ListItemText disableTypography className={value === 1 ? [classes.drawerItem, classes.drawerItemSelected] : classes.drawerItem}>Services</ListItemText>
                     </ListItem>
-                    <ListItem onClick={() => { setOpenDrawer(false); setValue(2) }} component={Link} to="/revolution" divider button selected={value === 2}>
+                    <ListItem onClick={() => { setOpenDrawer(false); props.setValue(2) }} component={Link} to="/revolution" divider button selected={value === 2}>
                         <ListItemText disableTypography className={value === 2 ? [classes.drawerItem, classes.drawerItemSelected] : classes.drawerItem}>Revolution</ListItemText>
                     </ListItem>
-                    <ListItem onClick={() => { setOpenDrawer(false); setValue(3) }} component={Link} to="/about" divider button selected={value === 3}>
+                    <ListItem onClick={() => { setOpenDrawer(false); props.setValue(3) }} component={Link} to="/about" divider button selected={value === 3}>
                         <ListItemText disableTypography className={value === 3 ? [classes.drawerItem, classes.drawerItemSelected] : classes.drawerItem}>About Us</ListItemText>
                     </ListItem>
-                    <ListItem onClick={() => { setOpenDrawer(false); setValue(4) }} component={Link} to="/contact" divider button selected={value === 4}>
+                    <ListItem onClick={() => { setOpenDrawer(false); props.setValue(4) }} component={Link} to="/contact" divider button selected={value === 4}>
                         <ListItemText disableTypography className={value === 4 ? [classes.drawerItem, classes.drawerItemSelected] : classes.drawerItem}>Contact Us</ListItemText>
                     </ListItem> */}
-                    <ListItem onClick={() => { setOpenDrawer(false); setValue(5) }} component={Link} to="/estimate" divider button selected={value === 5} classes={{ root: classes.drawerItemEstimate, selected: classes.drawerItemSelected }}>
+                    <ListItem onClick={() => { setOpenDrawer(false); props.setValue(5) }} component={Link} to="/estimate" divider button selected={props.value === 5} classes={{ root: classes.drawerItemEstimate, selected: classes.drawerItemSelected }}>
                         <ListItemText disableTypography className={classes.drawerItem}>Free Estimate</ListItemText>
                     </ListItem>
                 </List>
@@ -353,7 +351,7 @@ const Header = () => {
             <ElevationScroll>
                 <AppBar position="fixed" className={classes.appbar}>
                     <Toolbar disableGutters>
-                        <Button component={Link} to="/" className={classes.logoContainer} onClick={() => setValue(0)} disableRipple>
+                        <Button component={Link} to="/" className={classes.logoContainer} onClick={() => props.setValue(0)} disableRipple>
                             <img src={logo} alt="company logo" className={classes.logo} />
                         </Button>
                         {matches ? drawer : tabs}
