@@ -8,6 +8,7 @@ import {
   Route
 } from "react-router-dom";
 import Footer from './ui/Footer';
+import LandingPage from './LandingPage';
 
 const App = () => {
   const [value, setValue] = useState(0);
@@ -17,22 +18,7 @@ const App = () => {
       <BrowserRouter>
         <Header value={value} setValue={setValue} selectedIndex={selectedIndex} setSelectedIndex={setSelectedIndex} />
         <Routes>
-          <Route exact path="/" element={<div>Home i lobe bd <br />
-            im <br /> breakpointsbr <br /> sdhfg <br /> Home i lobe bd <br />
-            im <br /> breakpointsbr <br /> sdhfg <br />
-            Home i lobe bd <br />
-            im <br /> breakpointsbr <br /> sdhfg <br />
-            Home i lobe bd <br />
-            im <br /> breakpointsbr <br /> sdhfg <br /> Home i lobe bd <br />
-            im <br /> breakpointsbr <br /> sdhfg <br />
-            Home i lobe bd <br />
-            im <br /> breakpointsbr <br /> sdhfg <br />
-            Home i lobe bd <br />
-            im <br /> breakpointsbr <br /> sdhfg <br /> Home i lobe bd <br />
-            im <br /> breakpointsbr <br /> sdhfg <br />
-            Home i lobe bd <br />
-            im <br /> breakpointsbr <br /> sdhfg <br />
-          </div>}>
+          <Route exact path="/" element={<LandingPage/>}>
             <Route path="/services" element={<div>services</div>} />
             <Route path="/softwaredev" element={<div>services</div>} />
             <Route path="/appdev" element={<div>services</div>} />

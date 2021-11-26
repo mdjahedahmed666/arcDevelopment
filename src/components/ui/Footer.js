@@ -134,7 +134,7 @@ const Footer = (props) => {
                     <img src={instagram} alt="instagram" />
                 </Grid>
             </Grid>
-        </footer >
+        </footer>
     );
 };
 
