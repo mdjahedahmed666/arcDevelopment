@@ -15,9 +15,45 @@ const useStyle = makeStyles(theme => ({
         marginTop: "2em",
         marginLeft: "10%",
         [theme.breakpoints.down("sm")]: {
-          maxWidth: "30em"
+            maxWidth: "28em"
         }
     },
+    estimateButton: {
+        ...theme.typography.estimate,
+        backgroundColor: theme.palette.common.orange,
+        borderRadius: 50,
+        height: 45,
+        width: 145,
+        marginRight: 40,
+        "&:hover":{
+            backgroundColor: theme.palette.secondary.light
+        }
+    },
+    buttonContainer: {
+        marginTop: "1em",
+        marginBottom: "1em"
+    },
+    learnButtonHero: {
+        borderColor: theme.palette.common.blue,
+        color: theme.palette.common.blue,
+        borderWidth: 2,
+        borderRadius: 50,
+        textTransform: "none",
+        fontFamily: "roboto",
+        fontWeight: "bold",
+        fontSize: "0.9rem",
+        height: 45,
+        width: 145
+    },
+    mainContainer:{
+        marginTop: "5em",
+        [theme.breakpoints.down("md")]:{
+            marginTop: "3em"
+        },
+        [theme.breakpoints.down("xs")]:{
+            marginTop: "2em"
+        }
+    }
 }));
 
 const LandingPage = () => {
@@ -36,7 +72,7 @@ const LandingPage = () => {
     };
   return (
     <div>
-      <Grid container direction="column">
+      <Grid container direction="column" className={classes.mainContainer}>
         <Grid item>
           <Grid
             container
@@ -50,14 +86,14 @@ const LandingPage = () => {
                 <br />
                 to the Midwest
                 </Typography>
-              <Grid container>
+              <Grid container justify="center" className={classes.buttonContainer}>
                 <Grid item>
-                  <Button variant="contained">Free Estimate</Button>
+                  <Button className={classes.estimateButton} variant="contained">Free Estimate</Button>
                 </Grid>
                 <Grid item>
-                  <Button variant="outlined">
-                    learn mouseOver
-                    <ButtonArrow width={15} height={15} fill="red" />
+                  <Button variant="outlined" className={classes.learnButtonHero}>
+                    <span style={{marginRight: 10}}>learn more</span>
+                    <ButtonArrow width={15} height={15} fill={theme.palette.common.blue} />
                   </Button>
                 </Grid>
               </Grid>
