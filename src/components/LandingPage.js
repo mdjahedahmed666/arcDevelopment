@@ -3,108 +3,160 @@ import Lottie from "react-lottie";
 import React from "react";
 import Button from "@material-ui/core/Button";
 import ButtonArrow from "./ui/ButtonArrow";
-import { makeStyles,useTheme } from '@material-ui/styles';
+import { makeStyles, useTheme } from "@material-ui/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import animationData from "../animations/landinganimation/data";
+import customSoftwareIcon from "../assets/Custom Software Icon.svg";
 
-const useStyle = makeStyles(theme => ({
-
-    animation: {
-        maxWidth: "50em",
-        minWidth: "21em",
-        marginTop: "2em",
-        marginLeft: "10%",
-        [theme.breakpoints.down("sm")]: {
-            maxWidth: "28em"
-        }
+const useStyle = makeStyles((theme) => ({
+  animation: {
+    maxWidth: "50em",
+    minWidth: "21em",
+    marginTop: "2em",
+    marginLeft: "10%",
+    [theme.breakpoints.down("sm")]: {
+      maxWidth: "28em",
     },
-    estimateButton: {
-        ...theme.typography.estimate,
-        backgroundColor: theme.palette.common.orange,
-        borderRadius: 50,
-        height: 45,
-        width: 145,
-        marginRight: 40,
-        "&:hover":{
-            backgroundColor: theme.palette.secondary.light
-        }
+  },
+  estimateButton: {
+    ...theme.typography.estimate,
+    backgroundColor: theme.palette.common.orange,
+    borderRadius: 50,
+    height: 45,
+    width: 145,
+    marginRight: 40,
+    "&:hover": {
+      backgroundColor: theme.palette.secondary.light,
     },
-    buttonContainer: {
-        marginTop: "1em",
-        marginBottom: "1em"
-    },
-    learnButtonHero: {
-        borderColor: theme.palette.common.blue,
-        color: theme.palette.common.blue,
-        borderWidth: 2,
-        borderRadius: 50,
-        textTransform: "none",
-        fontFamily: "roboto",
-        fontWeight: "bold",
-        fontSize: "0.9rem",
-        height: 45,
-        width: 145
-    },
-    mainContainer:{
-        marginTop: "5em",
-        [theme.breakpoints.down("md")]:{
-            marginTop: "3em"
-        },
-        [theme.breakpoints.down("xs")]:{
-            marginTop: "2em"
-        }
+  },
+  buttonContainer: {
+    marginTop: "1em",
+    marginBottom: "1em",
+  },
+  learnButtonHero: {
+    ...theme.typography.learnButton,
+    fontSize: "0.9rem",
+    height: 45,
+    width: 145,
+  },
+  learnButton: {
+    ...theme.typography.learnButton,
+    fontSize: "0.7rem",
+    height: 35,
+    padding: 5,
+    [theme.breakpoints.down("sm")]: {
+      marginBottom: "2em"
     }
+  },
+  mainContainer: {
+    marginTop: "5em",
+    [theme.breakpoints.down("md")]: {
+      marginTop: "3em",
+    },
+    [theme.breakpoints.down("xs")]: {
+      marginTop: "2em",
+    },
+  },
+  heroTextContainer: {
+    minWidth: "21.5em",
+    marginLeft: "1em",
+    [theme.breakpoints.down("xs")]: {
+      marginLeft: 0
+    }
+  },
+  specialText: {
+    fontFamily: "Pacifico",
+    color: theme.palette.common.orange
+  },
+  subtitle: {
+    marginBottom: "1em"
+  },
 }));
 
 const LandingPage = () => {
-    const classes = useStyle();
-    const theme = useTheme();
-    const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
-    const matchesXS = useMediaQuery(theme.breakpoints.down("xs"));
-  
-    const defaultOptions = {
-      loop: true,
-      autoplay: false,
-      animationData: animationData,
-      rendererSettings: {
-        preserveAspectRatio: "xMidYMid slice"
-      }
-    };
+  const classes = useStyle();
+  const theme = useTheme();
+  const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
+  const matchesXS = useMediaQuery(theme.breakpoints.down("xs"));
+
+  const defaultOptions = {
+    loop: true,
+    autoplay: false,
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
   return (
-    <div>
-      <Grid container direction="column" className={classes.mainContainer}>
-        <Grid item>
-          <Grid
-            container
-            justify="flex-end"
-            alignItems="center"
-            direction="row"
-          >
-            <Grid sm item>
-              <Typography variant="h2" align="center">
-                Bringing West Coast Technology
-                <br />
-                to the Midwest
-                </Typography>
-              <Grid container justify="center" className={classes.buttonContainer}>
-                <Grid item>
-                  <Button className={classes.estimateButton} variant="contained">Free Estimate</Button>
-                </Grid>
-                <Grid item>
-                  <Button variant="outlined" className={classes.learnButtonHero}>
-                    <span style={{marginRight: 10}}>learn more</span>
-                    <ButtonArrow width={15} height={15} fill={theme.palette.common.blue} />
-                  </Button>
-                </Grid>
+    <Grid container direction="column" className={classes.mainContainer}>
+      {/*-----Hero Block----- */}
+      <Grid item >
+        <Grid container justify="flex-end" alignItems="center" direction="row">
+          <Grid sm item className={classes.heroTextContainer}>
+            <Typography variant="h2" align="center">
+              Bringing West Coast Technology
+              <br />
+              to the Midwest
+            </Typography>
+            <Grid
+              container
+              justify="center"
+              className={classes.buttonContainer}
+            >
+              <Grid item>
+                <Button className={classes.estimateButton} variant="contained">
+                  Free Estimate
+                </Button>
+              </Grid>
+              <Grid item>
+                <Button variant="outlined" className={classes.learnButtonHero}>
+                  <span style={{ marginRight: 10 }}>learn more</span>
+                  <ButtonArrow
+                    width={15}
+                    height={15}
+                    fill={theme.palette.common.blue}
+                  />
+                </Button>
               </Grid>
             </Grid>
-            <Grid sm item>
-            <Lottie className={classes.animation} options={defaultOptions} height={"100%"} width={"100%"} />
-            </Grid>
+          </Grid>
+          <Grid sm item>
+            <Lottie
+              className={classes.animation}
+              options={defaultOptions}
+              height={"100%"}
+              width={"100%"}
+            />
           </Grid>
         </Grid>
       </Grid>
-    </div>
+      {/*-----Service Block----- */}
+      <Grid item>
+        <Grid container direction="row">
+          <Grid item>
+            <Typography variant="h4">Custom Software Development</Typography>
+            <Typography variant="subtitle1" className={classes.subtitle}>
+              Save Energy. Save Time. Save Money.
+            </Typography>
+            <Typography variant="subtitle1">
+              Complete digital solutions, from investigation to{" "}
+              <span className={classes.specialText}>celebration.</span>
+            </Typography>
+            <Button variant="outlined" className={classes.learnButton}>
+                  <span style={{ marginRight: 10 }}>learn more</span>
+                  <ButtonArrow
+                    width={10}
+                    height={10}
+                    fill={theme.palette.common.blue}
+                  />
+                </Button>
+          </Grid>
+          <Grid item>
+          <img src={customSoftwareIcon} alt="custom software icon"/>
+          </Grid>
+        </Grid>
+      </Grid>
+    </Grid>
   );
 };
 
