@@ -71,6 +71,18 @@ const useStyle = makeStyles((theme) => ({
   subtitle: {
     marginBottom: "1em"
   },
+  icon: {
+    marginLeft: "2em",
+    [theme.breakpoints.down("xs")]: {
+      marginLeft: 0
+    }
+  },
+  serviceContainer: {
+    marginTop: "12em",
+    [theme.breakpoints.down("sm")]: {
+      padding: 10
+    }
+  }
 }));
 
 const LandingPage = () => {
@@ -132,8 +144,8 @@ const LandingPage = () => {
       </Grid>
       {/*-----Service Block----- */}
       <Grid item>
-        <Grid container direction="row">
-          <Grid item>
+        <Grid container direction="row" className={classes.serviceContainer} justify={matchesSM? "center":undefined}>
+          <Grid item style={{ marginLeft:matchesSM?0:"5em",textAlign:matchesSM?"center":undefined }}>
             <Typography variant="h4">Custom Software Development</Typography>
             <Typography variant="subtitle1" className={classes.subtitle}>
               Save Energy. Save Time. Save Money.
@@ -152,7 +164,7 @@ const LandingPage = () => {
                 </Button>
           </Grid>
           <Grid item>
-          <img src={customSoftwareIcon} alt="custom software icon"/>
+          <img className={classes.icon} src={customSoftwareIcon} alt="custom software icon"/>
           </Grid>
         </Grid>
       </Grid>
