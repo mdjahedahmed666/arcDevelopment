@@ -5,6 +5,7 @@ import theme from "./ui/Theme";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Footer from "./ui/Footer";
 import LandingPage from "./LandingPage";
+import Services from "./Services";
 
 const App = () => {
   const [value, setValue] = useState(0);
@@ -28,16 +29,15 @@ const App = () => {
                 setSelectedIndex={setSelectedIndex}
               />
             }
-          >
-            <Route path="/services" element={<div>services</div>} />
-            <Route path="/softwaredev" element={<div>services</div>} />
-            <Route path="/appdev" element={<div>services</div>} />
-            <Route path="/websitedev" element={<div>services</div>} />
-            <Route path="/revolution" />
-            <Route path="/about" element={<div>services</div>} />
-            <Route path="/contact" element={<div>services</div>} />
-            <Route path="/estimate" element={<div>services</div>} />
-          </Route>
+          />
+            <Route path="/services" element={<Services/>} />
+            <Route path="/softwaredev" element={<Services/>} />
+            <Route path="/appdev" element={<Services/>} />
+            <Route path="/websitedev" element={<Services/>} />
+            <Route path="/revolution" element={<Services/>}/>
+            <Route path="/about" element={<Services/>} />
+            <Route path="/contact" element={<Services/>} />
+            <Route path="/estimate" element={<Services/>} />
         </Routes>
         <Footer
           value={value}

@@ -49,6 +49,7 @@ const useStyle = makeStyles((theme) => ({
   },
 }));
 const CallToAction = (props) => {
+  console.log(props);
   const classes = useStyle();
   const theme = useTheme();
   const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
@@ -96,9 +97,11 @@ const CallToAction = (props) => {
       </Grid>
       <Grid item style={{ marginRight: matchesSM ? 0 : "2em" }}>
         <Button
+        component={Link}
+        to={"/estimate"}
           variant={"contained"}
           className={classes.estimateButton}
-          onClick={() => props.setValue(5)}
+          onClick={()=> props.setValue(5)}
         >
           Free Estimate
         </Button>
