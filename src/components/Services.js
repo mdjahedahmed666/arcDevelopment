@@ -28,7 +28,7 @@ const useStyle = makeStyles((theme) => ({
     },
   },
   serviceContainer: {
-    marginTop: "5em",
+    marginTop: "4em",
     [theme.breakpoints.down("sm")]: {
       padding: 10,
     },
@@ -51,53 +51,68 @@ const Services = (props) => {
   return (
     <div>
       <Grid container direction="column">
-      <Grid item>
-            {/*-----Mobile Apps development----- */}
+        <Grid
+          item
+          style={{
+            marginLeft: matchesSM ? 0 : "5em",
+            marginTop: matchesSM ? "1em" : "2em",
+          }}
+        >
+          <Typography align={matchesSM ? "center" : undefined} variant="h2">
+            Services
+          </Typography>
+        </Grid>
+        <Grid item>
+          {/*-----Mobile Apps development----- */}
+          <Grid
+            container
+            direction="row"
+            className={classes.serviceContainer}
+            justify={matchesSM ? "center" : "flex-end"}
+          >
             <Grid
-              container
-              direction="row"
-              className={classes.serviceContainer}
-              justify={matchesSM ? "center" : "flex-end"}
+              item
+              style={{
+                textAlign: matchesSM ? "center" : undefined,
+                width: matchesSM ? undefined : "35em",
+              }}
             >
-              <Grid
-                item
-                style={{ textAlign: matchesSM ? "center" : undefined }}
+              <Typography variant="h4">Mobile Apps Development</Typography>
+              <Typography variant="subtitle1" className={classes.subtitle}>
+                Extend Functionality. Extend Access. Increase Engagement.
+              </Typography>
+              <Typography variant="subtitle1">
+                Integrate your web experience or create standalone app{" "}
+                {matchesSM ? null : <br />} with either mobile platform
+              </Typography>
+              <Button
+                component={Link}
+                to={"/appdev"}
+                variant="outlined"
+                className={classes.learnButton}
+                onClick={() => {
+                  props.setValue(1);
+                  props.setSelectedIndex(2);
+                }}
               >
-                <Typography variant="h4">Mobile Apps Development</Typography>
-                <Typography variant="subtitle1" className={classes.subtitle}>
-                  Extend Functionality. Extend Access. Increase Engagement.
-                </Typography>
-                <Typography variant="subtitle1">
-                  Integrate your web experience or create standalone app{" "}
-                  {matchesSM ? null : <br />} with either mobile platform
-                </Typography>
-                <Button
-                  component={Link}
-                  to={"/appdev"}
-                  variant="outlined"
-                  className={classes.learnButton}
-                  onClick={() => {
-                    props.setValue(1);
-                    props.setSelectedIndex(2);
-                  }}
-                >
-                  <span style={{ marginRight: 10 }}>learn more</span>
-                  <ButtonArrow
-                    width={10}
-                    height={10}
-                    fill={theme.palette.common.blue}
-                  />
-                </Button>
-              </Grid>
-              <Grid item style={{ marginRight: matchesSM ? 0 : "5em" }}>
-                <img
-                  className={classes.icon}
-                  src={mobileAppsIcon}
-                  alt="mobileAppsIcon"
+                <span style={{ marginRight: 10 }}>learn more</span>
+                <ButtonArrow
+                  width={10}
+                  height={10}
+                  fill={theme.palette.common.blue}
                 />
-              </Grid>
+              </Button>
+            </Grid>
+            <Grid item style={{ marginRight: matchesSM ? 0 : "5em" }}>
+              <img
+                className={classes.icon}
+                src={mobileAppsIcon}
+                alt="mobileAppsIcon"
+                width={"250em"}
+              />
             </Grid>
           </Grid>
+        </Grid>
 
         <Grid item>
           {/*-----Custom Software Development----- */}
@@ -149,7 +164,7 @@ const Services = (props) => {
             </Grid>
           </Grid>
 
-          <Grid item style={{marginBottom:"5em"}}>
+          <Grid item style={{ marginBottom: "5em" }}>
             {/*-----Website Development----- */}
             <Grid
               container
@@ -161,6 +176,7 @@ const Services = (props) => {
                 item
                 style={{
                   textAlign: matchesSM ? "center" : undefined,
+                  width: matchesSM ? undefined : "35em",
                 }}
               >
                 <Typography variant="h4">Website Development</Typography>
@@ -188,11 +204,12 @@ const Services = (props) => {
                   />
                 </Button>
               </Grid>
-              <Grid item style={{marginRight: matchesSM ? 0 : "5em",}}>
+              <Grid item style={{ marginRight: matchesSM ? 0 : "5em" }}>
                 <img
                   className={classes.icon}
                   src={websitesIcon}
                   alt="websitesIcon"
+                  width={"250em"}
                 />
               </Grid>
             </Grid>
