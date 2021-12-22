@@ -1,7 +1,6 @@
 import {
   Button,
   Grid,
-  Link,
   Typography,
   useMediaQuery,
   useTheme,
@@ -12,6 +11,7 @@ import customSoftwareIcon from "../assets/Custom Software Icon.svg";
 import mobileAppsIcon from "../assets/mobileIcon.svg";
 import websitesIcon from "../assets/websiteIcon.svg";
 import { makeStyles } from "@material-ui/core/styles";
+import { Link } from "react-router-dom";
 
 const useStyle = makeStyles((theme) => ({
   specialText: {
