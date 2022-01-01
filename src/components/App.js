@@ -7,6 +7,7 @@ import Footer from "./ui/Footer";
 import LandingPage from "./LandingPage";
 import Services from "./Services";
 import CustomSoftware from "./CustomSoftware";
+import MobileApp from "./MobileApp";
 
 const App = () => {
   const [value, setValue] = useState(0);
@@ -33,7 +34,7 @@ const App = () => {
           />
           <Route path="/services" element={<Services />} />
           <Route path="/softwaredev" element={<CustomSoftware />} />
-          <Route path="/appdev" element={<Services />} />
+          <Route path="/appdev" element={<MobileApp />} />
           <Route path="/websitedev" element={<Services />} />
           <Route path="/revolution" element={<Services />} />
           <Route path="/about" element={<Services />} />
