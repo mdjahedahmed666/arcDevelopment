@@ -12,6 +12,10 @@ import { Link } from "react-router-dom";
 import backArrow from "../assets/backArrow.svg";
 import forwardArrow from "../assets/forwardArrow.svg";
 import integrationAnimation from "../animations/integrationAnimation/data.json";
+import swiss from "../assets/swissKnife.svg";
+import access from "../assets/extendAccess.svg";
+import engagement from "../assets/increaseEngagement.svg";
+import CallToAction from "./ui/CallToAction";
 
 const useStyle = makeStyles((theme) => ({
   heading: {
@@ -34,7 +38,7 @@ const MobileApp = (props) => {
   const classes = useStyle();
   const theme = useTheme();
   const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
-  const matchesSX = useMediaQuery(theme.breakpoints.down("sx"));
+  const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
   const defaultOptions = {
     loop: true,
     autoplay: false,
@@ -113,41 +117,70 @@ const MobileApp = (props) => {
           </Grid>
         </Hidden>
       </Grid>
-      <Grid item container direction="row" className={classes.rowContainer}>
+      <Grid item container direction={matchesSM?"column": "row"} className={classes.rowContainer} style={{marginTop:"10em", marginBottom:"10em"}}>
         <Grid item container direction="column" md>
           <Grid item>
-            <Typography variant="h4">Integration</Typography>
+            <Typography variant="h4" align={matchesSM ? "center" : undefined}>Integration</Typography>
           </Grid>
           <Grid item>
-            <Typography variant="body1" paragraph>
+            <Typography variant="body1" align={matchesSM ? "center" : undefined} paragraph>
               Our technology enables an innate interconnection between web and
               mobile applications, putting everything you need right in one
               convenient place.
             </Typography>
-            <Typography variant="body1" paragraph>
+            <Typography variant="body1" align={matchesSM ? "center" : undefined} paragraph>
               This allows you to extend your reach, reinvent interactions, and
               develop a stronger relationship with your users than ever before.
             </Typography>
           </Grid>
         </Grid>
         <Grid item md>
-          <Lottie options={defaultOptions} />
+          <Lottie options={defaultOptions} style={{maxWidth:"20em"}}/>
         </Grid>
         <Grid item container direction="column" md>
           <Grid item>
-            <Typography variant="h4" align="right">Simultaneous Platform Support</Typography>
+            <Typography variant="h4" align={matchesSM ? "center" : "right"}>Simultaneous Platform Support</Typography>
           </Grid>
           <Grid item>
-            <Typography variant="body1" paragraph align="right">
+            <Typography variant="body1" paragraph align={matchesSM ? "center" : "right"}>
               Our cutting-edge development process allows us to create apps for
               iPhone, Android, and tablets — all at the same time.
             </Typography>
-            <Typography variant="body1" paragraph align="right">
+            <Typography variant="body1" paragraph align={matchesSM ? "center" : "right"}>
               This significantly reduces costs and creates a more unified brand
               experience across all devices.
             </Typography>
           </Grid>
         </Grid>
+      </Grid>
+      <Grid item container direction={matchesMD?"column": "row"} className={classes.rowContainer} style={{marginBottom: "10em" }}>
+        <Grid item container direction="column" alignItems="center" md>
+          <Grid item>
+            <Typography variant="h4">Extend Functionality</Typography>
+          </Grid>
+          <Grid item>
+            <img src={swiss} alt="swiss army knife" />
+          </Grid>
+        </Grid>
+        <Grid item container direction="column" alignItems="center" md style={{marginBottom: matchesMD? "10em": 0, marginTop: matchesMD?"10em":0}}>
+          <Grid item>
+            <Typography variant="h4">Extend Access</Typography>
+          </Grid>
+          <Grid item>
+            <img src={access} alt="access" style={{maxWidth:matchesSM?"20em":"28em"}}/>
+          </Grid>
+        </Grid>
+        <Grid item container direction="column" alignItems="center" md>
+          <Grid item>
+            <Typography variant="h4">Increase Engagement</Typography>
+          </Grid>
+          <Grid item>
+            <img src={engagement} alt="engagement" />
+          </Grid>
+        </Grid>
+      </Grid>
+      <Grid item>
+        <CallToAction setValue={props.setValue}/>
       </Grid>
     </Grid>
   );
