@@ -9,6 +9,7 @@ import Services from "./Services";
 import CustomSoftware from "./CustomSoftware";
 import MobileApp from "./MobileApp";
 import Websites from "./Websites";
+import Revolution from "./Revolution";
 
 const App = () => {
   const [value, setValue] = useState(0);
@@ -37,7 +38,7 @@ const App = () => {
           <Route path="/softwaredev" element={<CustomSoftware />} />
           <Route path="/appdev" element={<MobileApp />} />
           <Route path="/websitedev" element={<Websites />} />
-          <Route path="/revolution" element={<Services />} />
+          <Route path="/revolution" element={<Revolution />} />
           <Route path="/about" element={<Services />} />
           <Route path="/contact" element={<Services />} />
           <Route path="/estimate" element={<Services />} />
