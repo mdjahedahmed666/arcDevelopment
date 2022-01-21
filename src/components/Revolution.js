@@ -1,4 +1,4 @@
-import { Grid, makeStyles, Typography } from "@material-ui/core";
+import { Grid, makeStyles, Typography, useMediaQuery, useTheme } from "@material-ui/core";
 import React from "react";
 import vision from "../assets/vision.svg";
 import technologyAnimation from "../animations/technologyAnimation/data.json";
@@ -26,6 +26,9 @@ const useStyle = makeStyles((theme) => ({
 
 const Revolution = (props) => {
   const classes = useStyle();
+  const theme = useTheme();
+  const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
+  const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
 
   const defaultOptions = {
     loop: true,
@@ -39,23 +42,24 @@ const Revolution = (props) => {
   return (
     <Grid container direction="column">
       <Grid item className={classes.rowContainer} style={{ marginTop: "2em" }}>
-        <Typography variant="h2" style={{ fontFamily: "Pacifico" }}>
+        <Typography align={matchesMD ? "center" : undefined} variant="h2" style={{ fontFamily: "Pacifico" }}>
           The Revolution
         </Typography>
       </Grid>
       <Grid
         item
         container
-        direction="row"
+        direction= {matchesMD? "column" : "row"}
         alignItems="center"
-        align="right"
+        align={matchesMD ? "center" : "right"}
         className={classes.rowContainer}
+        style={{ marginTop:"5em"}}
       >
         <Grid item lg>
           <img
             src={vision}
             alt="mountain"
-            style={{ maxWidth: "40em", marginRight: "5em" }}
+            style={{ maxWidth:matchesSM? 300: "40em", marginRight:matchesMD ? 0:"5em" ,marginBottom:matchesMD?"5em":0}}
           />
         </Grid>
         <Grid item container direction="column" lg style={{ maxWidth: "40em" }}>
@@ -101,9 +105,11 @@ const Revolution = (props) => {
       <Grid
         item
         container
-        direction="row"
+        direction= {matchesMD? "column" : "row"}
         alignItems="center"
+        align={matchesMD ? "center" : "left"}
         className={classes.rowContainer}
+        style={{ marginTop:"5em", marginBottom:"5em"}}
       >
         <Grid item container direction="column" lg style={{ maxWidth: "40em" }}>
           <Grid item>
@@ -155,7 +161,7 @@ const Revolution = (props) => {
             </Typography>
           </Grid>
         </Grid>
-        <Grid item container justify="flex-end" lg>
+        <Grid item container justify={matchesMD?"center" :"flex-end"} lg>
           <Lottie
             options={defaultOptions}
             style={{ maxWidth: "40em", margin: 0 }}
@@ -167,25 +173,60 @@ const Revolution = (props) => {
           <Typography variant="h4" gutterBottom>Process</Typography>
         </Grid>
       </Grid>
-      <Grid item container direction="row" className={classes.rowContainer} style={{backgroundColor:"#B3B3B3",height:"90em"}}>
-        <Grid item container direction="column" lg>
+      <Grid
+        item
+        container
+        direction={matchesMD ? "column" : "row"}
+        className={classes.rowContainer}
+        justify={matchesMD ? "center" : undefined}
+        style={{ backgroundColor: "#B3B3B3", height: "70em" }}
+      >
+        <Grid
+          item
+          container
+          direction="column"
+          alignItems={matchesMD ? "center" : undefined}
+          lg
+        >
           <Grid item>
-            <Typography variant="h4" style={{color:"#000",marginTop:"3em"}}>Consultation</Typography>
+            <Typography
+              variant="h4"
+              align={matchesMD ? "center" : undefined}
+              gutterBottom
+              style={{ color: "#000", marginTop: matchesMD ? 0 : "5em" }}
+            >
+              Consultation
+            </Typography>
           </Grid>
           <Grid item>
-            <Typography variant="body1" paragraph style={{color:"#fff", maxWidth:"20em"}}>
+            <Typography
+              align={matchesMD ? "center" : undefined}
+              variant="body1"
+              style={{ color: "#fff", maxWidth: "20em" }}
+              paragraph
+            >
               Our process begins the moment you realize you need a piece of
               technology for your business. Whether you already have an idea for
               where to start and what to do, or if you just know you want to
               step things up, our initial consultation will help you examine
               your business holistically to find the best solutions.
             </Typography>
-            <Typography variant="body1" paragraph style={{color:"#fff",maxWidth:"20em"}}>
+            <Typography
+              align={matchesMD ? "center" : undefined}
+              variant="body1"
+              style={{ color: "#fff", maxWidth: "20em" }}
+              paragraph
+            >
               Detailed notes will be taken on your requirements and constraints,
               while taking care to identify other potential areas for
               consideration.
             </Typography>
-            <Typography variant="body1" paragraph style={{color:"#fff",maxWidth:"20em"}}>
+            <Typography
+              align={matchesMD ? "center" : undefined}
+              variant="body1"
+              style={{ color: "#fff", maxWidth: "20em" }}
+              paragraph
+            >
               Cutting-edge advancements in machine learning like object
               detection and natural language processing allow computers to do
               things previously unimaginable, and our expertise and intuition
@@ -193,11 +234,16 @@ const Revolution = (props) => {
             </Typography>
           </Grid>
         </Grid>
-        <Grid item lg  style={{alignSelf:"center"}}>
-          <img src={consultation} alt="handship" />
+        <Grid item lg style={{ alignSelf: "center" }}>
+          <img
+            src={consultation}
+            alt="handshake"
+            width="100%"
+            style={{ maxWidth: 700 }}
+          />
         </Grid>
       </Grid>
-      <Grid item container direction="row" className={classes.rowContainer} style={{backgroundColor:"#B3B3B3",height:"90em"}}>
+      <Grid item container direction={matchesMD? "column" : "row"} align={matchesMD ? "center" : "left"} className={classes.rowContainer} style={{backgroundColor:"#FF7373",height: "70em"}}>
         <Grid item container direction="column" lg>
           <Grid item>
             <Typography variant="h4" style={{color:"#000",marginTop:"3em"}}>Mockup</Typography>
@@ -220,10 +266,10 @@ const Revolution = (props) => {
           </Grid>
         </Grid>
         <Grid item lg  style={{alignSelf:"center"}}>
-          <img src={mockup} alt="mockup" />
+          <img style={{maxWidth:matchesSM? 300: "40em",marginTop:"5em"}} src={mockup} alt="mockup" />
         </Grid>
       </Grid>
-      <Grid item container direction="row" className={classes.rowContainer} style={{backgroundColor:"#B3B3B3",height:"90em"}}>
+      <Grid item container direction={matchesMD? "column" : "row"} align={matchesMD ? "center" : "left"} className={classes.rowContainer} style={{backgroundColor:"#39B54A",height: "70em"}}>
         <Grid item container direction="column" lg>
           <Grid item>
             <Typography variant="h4" style={{color:"#000",marginTop:"3em"}}>Review</Typography>
@@ -247,10 +293,10 @@ const Revolution = (props) => {
           </Grid>
         </Grid>
         <Grid item lg  style={{alignSelf:"center"}}>
-          <img src={review} alt="review" />
+          <img style={{maxWidth:matchesSM? 300: "40em",marginTop:"5em"}} src={review} alt="review" />
         </Grid>
       </Grid>
-      <Grid item container direction="row" className={classes.rowContainer} style={{backgroundColor:"#B3B3B3",height:"90em"}}>
+      <Grid item container direction={matchesMD? "column" : "row"} align={matchesMD ? "center" : "left"} className={classes.rowContainer} style={{backgroundColor:"#A67C52",height: "70em"}}>
         <Grid item container direction="column" lg>
           <Grid item>
             <Typography variant="h4" style={{color:"#000",marginTop:"3em"}}>Design</Typography>
@@ -270,10 +316,10 @@ const Revolution = (props) => {
           </Grid>
         </Grid>
         <Grid item lg  style={{alignSelf:"center"}}>
-          <img src={design} alt="handship" />
+          <img style={{maxWidth:matchesSM? 300: "40em",marginTop:"5em"}} src={design} alt="handship" />
         </Grid>
       </Grid>
-      <Grid item container direction="row" className={classes.rowContainer} style={{backgroundColor:"#B3B3B3",height:"90em"}}>
+      <Grid item container direction={matchesMD? "column" : "row"} align={matchesMD ? "center" : "left"} className={classes.rowContainer} style={{backgroundColor:"#39B54A",height: "70em"}}>
         <Grid item container direction="column" lg>
           <Grid item>
             <Typography variant="h4" style={{color:"#000",marginTop:"3em"}}>Review</Typography>
@@ -292,10 +338,10 @@ const Revolution = (props) => {
           </Grid>
         </Grid>
         <Grid item lg  style={{alignSelf:"center"}}>
-          <img src={review} alt="review" />
+          <img style={{maxWidth:matchesSM? 300: "40em",marginTop:"5em"}} src={review} alt="review" />
         </Grid>
       </Grid>
-      <Grid item container direction="row" className={classes.rowContainer} style={{backgroundColor:"#B3B3B3",height:"90em"}}>
+      <Grid item container direction={matchesMD? "column" : "row"} align={matchesMD ? "center" : "left"} className={classes.rowContainer} style={{backgroundColor:"#FBB03B",height: "70em"}}>
         <Grid item container direction="column" lg>
           <Grid item>
             <Typography variant="h4" style={{color:"#000",marginTop:"3em"}}>Build</Typography>
@@ -332,10 +378,10 @@ const Revolution = (props) => {
           </Grid>
         </Grid>
         <Grid item lg  style={{alignSelf:"center"}}>
-          <img src={build} alt="handship" />
+          <img style={{maxWidth:matchesSM? 300: "40em",marginTop:"5em"}} src={build} alt="handship" />
         </Grid>
       </Grid>
-      <Grid item container direction="row" className={classes.rowContainer} style={{backgroundColor:"#B3B3B3",height:"90em"}}>
+      <Grid item container direction={matchesMD? "column" : "row"} align={matchesMD ? "center" : "left"} className={classes.rowContainer} style={{backgroundColor:"#C1272D",height: "70em"}}>
         <Grid item container direction="column" lg>
           <Grid item>
             <Typography variant="h4" style={{color:"#000",marginTop:"3em"}}>Launch</Typography>
@@ -359,10 +405,10 @@ const Revolution = (props) => {
           </Grid>
         </Grid>
         <Grid item lg  style={{alignSelf:"center"}}>
-          <img src={launch} alt="review" />
+          <img style={{maxWidth:matchesSM? 300: "40em",marginTop:"5em"}} src={launch} alt="review" />
         </Grid>
       </Grid>
-      <Grid item container direction="row" className={classes.rowContainer} style={{backgroundColor:"#B3B3B3",height:"90em"}}>
+      <Grid item container direction={matchesMD? "column" : "row"} align={matchesMD ? "center" : "left"} className={classes.rowContainer} style={{backgroundColor:"#8E45CE",height: "70em"}}>
         <Grid item container direction="column" lg>
           <Grid item>
             <Typography variant="h4" style={{color:"#000",marginTop:"3em"}}>Maintain</Typography>
@@ -385,10 +431,17 @@ const Revolution = (props) => {
           </Grid>
         </Grid>
         <Grid item lg  style={{alignSelf:"center"}}>
-          <img src={maintain} alt="review" />
+          <img style={{maxWidth:matchesSM? 300: "40em",marginTop:"5em"}} src={maintain} alt="review" />
         </Grid>
       </Grid>
-      <Grid item container direction="row" className={classes.rowContainer} style={{backgroundColor:"#B3B3B3",height:"90em"}}>
+      <Grid
+        item
+        container
+        direction={matchesMD ? "column" : "row"}
+        align={matchesMD ? "center" : "left"}
+        className={classes.rowContainer}
+        style={{ backgroundColor: "#29ABE2", height: "70em" }}
+      >
         <Grid item container direction="column" lg>
           <Grid item>
             <Typography variant="h4" style={{color:"#000",marginTop:"3em"}}>Iterate</Typography>
@@ -413,7 +466,7 @@ const Revolution = (props) => {
           </Grid>
         </Grid>
         <Grid item lg  style={{alignSelf:"center"}}>
-          <img src={iterate} alt="review" />
+          <img style={{maxWidth:matchesSM? 300: "40em",marginTop:"5em"}} src={iterate} alt="review" width="100%"/>
         </Grid>
       </Grid>
       <Grid item>
