@@ -68,6 +68,11 @@ export default createTheme({
             fontWeight:"300",
             color:arcGrey
           },
+          caption: {
+            fontSize: "1rem",
+            fontWeight: 300,
+            color: arcGrey
+          },
           learnButton: {
             borderColor: arcBlue,
             color: arcBlue,
