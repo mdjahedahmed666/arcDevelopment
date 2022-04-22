@@ -11,6 +11,7 @@ import MobileApp from "./MobileApp";
 import Websites from "./Websites";
 import Revolution from "./Revolution";
 import About from "./About";
+import Contact from "./Contact";
 
 const App = () => {
   const [value, setValue] = useState(0);
@@ -41,7 +42,7 @@ const App = () => {
           <Route path="/websitedev" element={<Websites />} />
           <Route path="/revolution" element={<Revolution />} />
           <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Services />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="/estimate" element={<Services />} />
         </Routes>
         <Footer
