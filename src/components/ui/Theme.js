@@ -82,6 +82,13 @@ export default createTheme({
             fontFamily: "roboto",
             fontWeight: "bold"
           }
+    },
+overrides:{ 
+  MuiInputLabel:{ 
+    root:{ 
+      color: arcBlue,
+      fontSize: "1rem"
     }
-
+  }
+}
 })
